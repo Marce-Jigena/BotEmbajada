@@ -2,6 +2,7 @@ from EmailSender import Sender
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
 import time
 
 
@@ -22,16 +23,20 @@ class Window:
         emailSent = False
 
         while emailSent is False:
-            element_table = driver.find_element(By.XPATH, "//table/tbody/tr[last()-11]/td[last()-1]").text
+            try:
+                element_table = driver.find_element(By.XPATH, "//table/tbody/tr[last()-11]/td[last()-1]").text
 
-            if element_table == "fecha por confirmar":
+                if element_table == "fecha por confirmar":
                 driver.refresh()
                 time.sleep(10)
-            else:
+                else:
                 # ToDo: Implementar un foreach que itere por varios emails
-                email = Sender("marcelojigena1@gmail.com", "zpne ukyl duzl obhu ", "marcelojigena1@gmail.com")
-                email.Send()
-                email = Sender("marcelojigena1@gmail.com", "zpne ukyl duzl obhu ", "micaeladdlf@gmail.com")
-                email.Send()
-                driver.quit()
-                emailSent = True
+                    email = Sender("marcelojigena1@gmail.com", "zpne ukyl duzl obhu ", "marcelojigena1@gmail.com")
+                    email.Send()
+                    email = Sender("marcelojigena1@gmail.com", "zpne ukyl duzl obhu ", "micaeladdlf@gmail.com")
+                    email.Send()
+                    driver.quit()
+                    emailSent = True
+            except NoSuchElementException:
+                driver.refresh()
+                time.sleep(10)
