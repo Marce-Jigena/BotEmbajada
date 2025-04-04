@@ -27,8 +27,8 @@ class Window:
                 element_table = driver.find_element(By.XPATH, "//table/tbody/tr[last()-11]/td[last()-1]").text
 
                 if element_table == "fecha por confirmar":
-                driver.refresh()
-                time.sleep(10)
+                    driver.refresh()
+                    time.sleep(10)
                 else:
                 # ToDo: Implementar un foreach que itere por varios emails
                     email = Sender("marcelojigena1@gmail.com", "zpne ukyl duzl obhu ", "marcelojigena1@gmail.com")
